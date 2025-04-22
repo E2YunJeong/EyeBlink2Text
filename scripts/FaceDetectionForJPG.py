@@ -1,6 +1,5 @@
 import dlib
 import cv2
-import numpy as np
 
 # 랜드마크 인덱스 설정
 RIGHT_EYE = list(range(36, 42))
