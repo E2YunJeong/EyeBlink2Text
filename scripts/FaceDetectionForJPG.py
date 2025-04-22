@@ -30,13 +30,13 @@ for (i, face) in enumerate(faces):
     # 얼굴 영역 사각형으로 표시
     cv2.rectangle(image, (face.left(), face.top()), (face.right(), face.bottom()), (0, 255, 0), 2)
 
-    points = np.matrix([[p.x, p.y] for p in predictor(gray, face).parts()])
-    show_parts = points[EYES]
+    # 랜드마크 추출
+    landmarks = predictor(gray, face)
 
-    # 눈 영역에 해당하는 랜트마크에 점 찍기
-    for (i, point) in enumerate(show_parts):
-        x = point[0, 0]
-        y = point[0, 1]
+    # 눈 부위 시각화
+    for n in EYES:
+        x = landmarks.part(n).x
+        y = landmarks.part(n).y
         cv2.circle(image, (x, y), 4, (0, 0, 255), -1)
 
 cv2.imshow("Face and Eyes Detection", image)
